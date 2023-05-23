@@ -4,6 +4,18 @@ import { ProductoRepository } from "../domain/Producto-repository"
 import { QueryError } from 'mysql2'
 
 export class productoRepositori implements ProductoRepository {
+  async getById(id: number): Promise<Producto | null> {
+    const mysql = new database();
+    return await new Promise((resolve, reject) => {
+      mysql.connection.query(`SELECT * FROM productosdecarros.productos WHERE id = ${id}`, (error: QueryError, rows: Producto) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(rows)
+        }
+      });
+    });
+  }
   async getProducto(): Promise<Producto[] | null> {
     const mysql = new database();
     return await new Promise((resolve, reject) => {
@@ -16,6 +28,7 @@ export class productoRepositori implements ProductoRepository {
       });
     });
   };
+
 
   async create(id: number, nombre: string, precio: number, garantia: string): Promise<Producto> {
     const mysql = new database();
@@ -30,4 +43,6 @@ export class productoRepositori implements ProductoRepository {
       });
     })
   };
+
+
 }

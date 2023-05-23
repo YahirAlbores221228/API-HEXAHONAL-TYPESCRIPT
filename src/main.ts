@@ -1,3 +1,5 @@
+//221228-Yahir Alberto Albores Madrigal
+//221267 Cristian Gerardo vazquez Ramos
 import "./shared/infrastructure/load-env-vars";
 import bodyParser from "body-parser";
 import express from "express";
